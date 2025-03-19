@@ -51,6 +51,6 @@ public class Database {
     }
 
     public Fumetto find(String tag) {
-        return this.list.stream().filter( item -> item.Tag.equals(tag) ).findFirst().get();
+        return this.list.stream().filter( item -> item.Tag.equals(tag) ).findFirst().orElse(null);
     }
 }
