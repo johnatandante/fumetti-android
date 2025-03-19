@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
+            <EditText
                 android:id="@+id/txtNomeDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:textColor="@color/design_default_color_error"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-            <TextView
+            <EditText
                 android:id="@+id/txtCasaEditriceDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

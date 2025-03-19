@@ -11,8 +11,8 @@ public class FumettiBusiness {
        fumetti = Database.getInstance();
     }
 
-    public void add(String immagine, String nome, String casa) {
-        this.fumetti.insert(new Fumetto(immagine, nome, casa));
+    public Fumetto add(String immagine, String nome, String casa) {
+        return this.fumetti.insert(new Fumetto(immagine, nome, casa));
     }
 
     public Fumetto[] getFumetti() {

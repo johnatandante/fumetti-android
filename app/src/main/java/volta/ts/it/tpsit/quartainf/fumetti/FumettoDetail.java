@@ -1,14 +1,16 @@
 package volta.ts.it.tpsit.quartainf.fumetti;
 
+import android.app.ComponentCaller;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 //import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import volta.ts.it.tpsit.quartainf.fumetti.bean.Fumetto;
 import volta.ts.it.tpsit.quartainf.fumetti.bean.FumettoDto;
 import volta.ts.it.tpsit.quartainf.fumetti.business.FumettiBusiness;
+import volta.ts.it.tpsit.quartainf.fumetti.controller.MainActivityOnBackPressedCallback;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.SaveItemClickListener;
 
 public class FumettoDetail extends AppCompatActivity {
@@ -25,8 +28,9 @@ public class FumettoDetail extends AppCompatActivity {
     private final FumettiBusiness business;
 
     private ImageView image;
-    private TextView editore, nome, quanti;
-    private Button plus, minus, save;
+    private EditText editore, nome;
+    private TextView quanti;
+    private Button plus, minus, save, back;
 
     int tot_quanti = 0;
 
@@ -72,23 +76,31 @@ public class FumettoDetail extends AppCompatActivity {
         if(detail != null){
             tot_quanti = detail.getQuanti();
         } else {
-            tot_quanti = 0;
+            tot_quanti = 1;
         }
         quanti.setText(Integer.toString(tot_quanti));
 
         minus = findViewById(R.id.btnMinusOneDetail);
         minus.setOnClickListener( (v) -> {
-            if(tot_quanti > 0) tot_quanti--;
+            if(tot_quanti > 1) tot_quanti--;
             quanti.setText(Integer.toString(tot_quanti));
         });
 
         plus = findViewById(R.id.btnPlusOneDetail);
         plus.setOnClickListener( (v) -> {
-            quanti.setText(Integer.toString(tot_quanti++));
+            quanti.setText(Integer.toString(++tot_quanti));
         });
 
         save = findViewById(R.id.btnSaveDetail);
-        save.setOnClickListener( new SaveItemClickListener(getDto(), business));
+        save.setOnClickListener( new SaveItemClickListener(nome, editore, image, quanti, business));
+
+        this.getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+
+            @Override
+            public void handleOnBackPressed() {
+                endUp();
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -97,14 +109,8 @@ public class FumettoDetail extends AppCompatActivity {
         });
     }
 
-    private FumettoDto getDto() {
-        FumettoDto dto = new FumettoDto();
-        dto.CasaEditrice = editore.getText().toString();
-        dto.Nome = nome.getText().toString();
-        dto.Immagine = image.getTag().toString();
-        dto.Quanti = tot_quanti;
-
-        return dto;
+    private void endUp() {
+        this.finish();
     }
 
 }

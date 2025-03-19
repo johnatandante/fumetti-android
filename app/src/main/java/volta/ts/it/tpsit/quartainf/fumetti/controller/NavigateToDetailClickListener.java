@@ -2,6 +2,7 @@ package volta.ts.it.tpsit.quartainf.fumetti.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import java.io.Serializable;

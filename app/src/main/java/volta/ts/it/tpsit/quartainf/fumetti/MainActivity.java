@@ -1,7 +1,11 @@
 package volta.ts.it.tpsit.quartainf.fumetti;
 
+import android.app.ComponentCaller;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.LayoutInflater;
@@ -14,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import volta.ts.it.tpsit.quartainf.fumetti.business.FumettiBusiness;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.ClearListClickListener;
+import volta.ts.it.tpsit.quartainf.fumetti.controller.MainActivityOnBackPressedCallback;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.NavigateToDetailClickListener;
 import volta.ts.it.tpsit.quartainf.fumetti.ui.FumettiListAdapter;
 
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
@@ -44,11 +50,22 @@ public class MainActivity extends AppCompatActivity {
         caricaListView();
         popolaListe();
 
+        //this.getOnBackPressedDispatcher().addCallback(new MainActivityOnBackPressedCallback(mAdapter, this));
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if(hasFocus)
+            mAdapter.notifyDataSetChanged();
     }
 
     public void popolaListe() {
@@ -62,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public void caricaListView() {
         llComics.setAdapter(null);
         mAdapter = new FumettiListAdapter(business, getResources(),
-                getApplicationContext(), (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE));
+                this, (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE));
         llComics.setAdapter(mAdapter);
     }
 

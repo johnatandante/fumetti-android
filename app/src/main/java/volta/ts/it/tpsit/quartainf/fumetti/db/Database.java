@@ -20,8 +20,9 @@ public class Database {
         list = new ArrayList<>();
     }
 
-    public void insert(Fumetto fumetto) {
+    public Fumetto insert(Fumetto fumetto) {
         list.add(fumetto);
+        return fumetto;
     }
 
     public Fumetto[] selectAll() {
