@@ -29,4 +29,44 @@
         android:layout_toRightOf="@id/imgComic"
         android:textColor="@color/material_dynamic_primary30"
         android:textSize="20sp" />
+    <Button
+        android:id="@+id/btnAddAnother"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtCasaEditrice"
+        android:layout_toRightOf="@id/imgComic"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:textSize="20sp"
+        android:text="@string/btn_addAnother"
+        android:drawableLeft="@drawable/note_add_24px"
+        android:gravity="left|center_vertical" />
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAddAnother"
+        android:layout_toRightOf="@id/imgComic"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:textSize="20sp"
+        android:text="@string/btn_edit"
+        android:drawableLeft="@drawable/edit_24px"
+        android:gravity="left|center_vertical" />
+    <Button
+        android:id="@+id/btnRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnEdit"
+        android:layout_toRightOf="@id/imgComic"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:textSize="20sp"
+        android:text="@string/btn_remove"
+        android:drawableLeft="@drawable/delete_24px"
+        android:gravity="left|center_vertical" />
+
+    <!--ImageView ...
+    android:src="@drawable/edit_24"
+    /-->
 </RelativeLayout>

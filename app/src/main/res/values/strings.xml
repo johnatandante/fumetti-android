@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Fumetti</string>
+
+    <string name="btn_save">Salva</string>
+    <string name="btn_add">Aggiungi</string>
+    <string name="btn_addAnother">Add</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_remove">Rimuovi</string>
+    <string name="btn_removeAll">Rimuovi Tutti</string>
+    <string name="btn_plus">+</string>
+    <string name="btn_minus">-</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

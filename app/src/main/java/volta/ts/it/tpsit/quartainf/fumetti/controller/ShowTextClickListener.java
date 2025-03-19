@@ -16,7 +16,7 @@ public class ShowTextClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        int position = (int) v.getTag();
+        //int position = (int) v.getTag();
         Toast.makeText(v.getContext(),
                 item.Nome, Toast.LENGTH_LONG).show();
     }

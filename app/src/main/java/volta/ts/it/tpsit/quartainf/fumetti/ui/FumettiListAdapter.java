@@ -12,6 +12,9 @@ import java.util.TreeSet;
 import volta.ts.it.tpsit.quartainf.fumetti.R;
 import volta.ts.it.tpsit.quartainf.fumetti.bean.Fumetto;
 import volta.ts.it.tpsit.quartainf.fumetti.business.FumettiBusiness;
+import volta.ts.it.tpsit.quartainf.fumetti.controller.AddItemClickListener;
+import volta.ts.it.tpsit.quartainf.fumetti.controller.DeleteItemClickListener;
+import volta.ts.it.tpsit.quartainf.fumetti.controller.NavigateToDetailClickListener;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.ShowTextClickListener;
 
 public class FumettiListAdapter extends BaseAdapter {
@@ -52,12 +55,12 @@ public class FumettiListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return this.business.Fumetti.size();
+            return this.business.getFumetti().length;
         }
 
         @Override
         public String getItem(int position) {
-            return this.business.Fumetti.get(position).Tag;
+            return this.business.getFumetti()[position].Tag;
         }
 
         @Override
@@ -68,7 +71,7 @@ public class FumettiListAdapter extends BaseAdapter {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             final RowViewHolder holder = new RowViewHolder();
-            final Fumetto f = this.business.Fumetti.get(position);
+            final Fumetto f = this.business.getFumetti()[position];
             convertView = mInflater.inflate(R.layout.row, null);
 
             holder.immagine = convertView.findViewById(R.id.imgComic);
@@ -83,6 +86,15 @@ public class FumettiListAdapter extends BaseAdapter {
             holder.immagine.setTag(position);
 
             holder.immagine.setOnClickListener(new ShowTextClickListener(f));
+
+            holder.add = convertView.findViewById(R.id.btnAddAnother);
+            holder.add.setOnClickListener(new AddItemClickListener(business, f, this));
+
+            holder.delete = convertView.findViewById(R.id.btnRemove);
+            holder.delete.setOnClickListener(new DeleteItemClickListener(business, f, this));
+
+            holder.edit = convertView.findViewById(R.id.btnEdit);
+            holder.edit.setOnClickListener(new NavigateToDetailClickListener(f, context));
 
             convertView.setTag(holder);
 
