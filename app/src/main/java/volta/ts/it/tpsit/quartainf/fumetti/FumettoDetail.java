@@ -1,6 +1,5 @@
 package volta.ts.it.tpsit.quartainf.fumetti;
 
-import android.app.ComponentCaller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,29 +7,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Locale;
+
 import volta.ts.it.tpsit.quartainf.fumetti.bean.Fumetto;
-import volta.ts.it.tpsit.quartainf.fumetti.bean.FumettoDto;
 import volta.ts.it.tpsit.quartainf.fumetti.business.FumettiBusiness;
-import volta.ts.it.tpsit.quartainf.fumetti.controller.MainActivityOnBackPressedCallback;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.SaveItemClickListener;
 
 public class FumettoDetail extends AppCompatActivity {
 
-    private Fumetto detail;
     private final FumettiBusiness business;
 
-    private ImageView image;
-    private EditText editore, nome;
     private TextView quanti;
-    private Button plus, minus, save, back;
 
     int tot_quanti = 0;
 
@@ -44,11 +37,14 @@ public class FumettoDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //EdgeToEdge.enable(this);
+        ImageView image;
+        EditText editore, nome;
+        Button plus, minus, save;
+
         setContentView(R.layout.activity_fumetto_detail);
 
         Intent intent = getIntent();
-        detail = (Fumetto)intent.getSerializableExtra("detail");
+        Fumetto detail = (Fumetto)intent.getSerializableExtra("detail");
 
         String tag = Fumetto.DEFAULT_TAG, immagine = Fumetto.DEFAULT_TAG;
 
@@ -78,18 +74,18 @@ public class FumettoDetail extends AppCompatActivity {
         } else {
             tot_quanti = 1;
         }
-        quanti.setText(Integer.toString(tot_quanti));
+        quanti.setText(String.format(Locale.getDefault(),"%d",tot_quanti));
 
         minus = findViewById(R.id.btnMinusOneDetail);
         minus.setOnClickListener( (v) -> {
             if(tot_quanti > 1) tot_quanti--;
-            quanti.setText(Integer.toString(tot_quanti));
+            quanti.setText(String.format(Locale.getDefault(),"%d",tot_quanti));
         });
 
         plus = findViewById(R.id.btnPlusOneDetail);
-        plus.setOnClickListener( (v) -> {
-            quanti.setText(Integer.toString(++tot_quanti));
-        });
+        plus.setOnClickListener( (v) ->
+                quanti.setText(String.format(Locale.getDefault(),"%d",++tot_quanti))
+        );
 
         save = findViewById(R.id.btnSaveDetail);
         save.setOnClickListener( new SaveItemClickListener(nome, editore, image, quanti, business));

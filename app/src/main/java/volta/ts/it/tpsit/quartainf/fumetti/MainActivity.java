@@ -1,11 +1,7 @@
 package volta.ts.it.tpsit.quartainf.fumetti;
 
-import android.app.ComponentCaller;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.LayoutInflater;
@@ -18,14 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import volta.ts.it.tpsit.quartainf.fumetti.business.FumettiBusiness;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.ClearListClickListener;
-import volta.ts.it.tpsit.quartainf.fumetti.controller.MainActivityOnBackPressedCallback;
 import volta.ts.it.tpsit.quartainf.fumetti.controller.NavigateToDetailClickListener;
 import volta.ts.it.tpsit.quartainf.fumetti.ui.FumettiListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView llComics;
-    private Button btnAdd, btnClear;
     private FumettiListAdapter mAdapter;
     private final FumettiBusiness business;
     public MainActivity(){
@@ -35,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Button btnAdd, btnClear;
 
         //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -65,14 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter.notifyDataSetChanged();
     }
-
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//
-//        if(hasFocus)
-//            mAdapter.notifyDataSetChanged();
-//    }
 
     public void popolaListe() {
         business.add("batman", "Batman","DC");
