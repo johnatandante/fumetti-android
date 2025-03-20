@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         caricaListView();
         popolaListe();
-
         //this.getOnBackPressedDispatcher().addCallback(new MainActivityOnBackPressedCallback(mAdapter, this));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -61,12 +60,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
+    public void onRestart() {
+        super.onRestart();
 
-        if(hasFocus)
-            mAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
+
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//
+//        if(hasFocus)
+//            mAdapter.notifyDataSetChanged();
+//    }
 
     public void popolaListe() {
         business.add("batman", "Batman","DC");
